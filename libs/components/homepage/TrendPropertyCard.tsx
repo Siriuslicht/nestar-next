@@ -9,10 +9,11 @@ import { REACT_APP_API_URL } from '../../config';
 import { useRouter } from 'next/router';
 import { useReactiveVar } from '@apollo/client';
 import { userVar } from '../../../apollo/store';
+import { T } from '../../types/common';
 
 interface TrendPropertyCardProps {
 	property: Property;
-	likePropertyHandler: any;
+	likePropertyHandler: (user: T, id: string) => void;
 }
 
 const TrendPropertyCard = (props: TrendPropertyCardProps) => {
@@ -23,10 +24,15 @@ const TrendPropertyCard = (props: TrendPropertyCardProps) => {
 
 	/** HANDLERS **/
 
+	const pushDetailHandler = async (properytId: string) => {
+		await router.push({ pathname: 'property/detail', query: { id: properytId } });
+	};
+
 	if (device === 'mobile') {
 		return (
 			<Stack className="trend-card-box" key={property._id}>
 				<Box
+					onClick={() => pushDetailHandler(property._id)}
 					component={'div'}
 					className={'card-img'}
 					style={{ backgroundImage: `url(${REACT_APP_API_URL}/${property?.propertyImages[0]})` }}
@@ -34,7 +40,9 @@ const TrendPropertyCard = (props: TrendPropertyCardProps) => {
 					<div>${property.propertyPrice}</div>
 				</Box>
 				<Box component={'div'} className={'info'}>
-					<strong className={'title'}>{property.propertyTitle}</strong>
+					<strong onClick={() => pushDetailHandler(property._id)} className={'title'}>
+						{property.propertyTitle}
+					</strong>
 					<p className={'desc'}>{property.propertyDesc ?? 'no description'}</p>
 					<div className={'options'}>
 						<div>
@@ -61,7 +69,7 @@ const TrendPropertyCard = (props: TrendPropertyCardProps) => {
 								<RemoveRedEyeIcon />
 							</IconButton>
 							<Typography className="view-cnt">{property?.propertyViews}</Typography>
-							<IconButton color={'default'}>
+							<IconButton color={'default'} onClick={() => likePropertyHandler(user, property._id)}>
 								{property?.meLiked && property?.meLiked[0]?.myFavorite ? (
 									<FavoriteIcon style={{ color: 'red' }} />
 								) : (
@@ -78,6 +86,7 @@ const TrendPropertyCard = (props: TrendPropertyCardProps) => {
 		return (
 			<Stack className="trend-card-box" key={property._id}>
 				<Box
+					onClick={() => pushDetailHandler(property._id)}
 					component={'div'}
 					className={'card-img'}
 					style={{ backgroundImage: `url(${REACT_APP_API_URL}/${property?.propertyImages[0]})` }}
@@ -85,7 +94,9 @@ const TrendPropertyCard = (props: TrendPropertyCardProps) => {
 					<div>${property.propertyPrice}</div>
 				</Box>
 				<Box component={'div'} className={'info'}>
-					<strong className={'title'}>{property.propertyTitle}</strong>
+					<strong onClick={() => pushDetailHandler(property._id)} className={'title'}>
+						{property.propertyTitle}
+					</strong>
 					<p className={'desc'}>{property.propertyDesc ?? 'no description'}</p>
 					<div className={'options'}>
 						<div>
@@ -112,7 +123,7 @@ const TrendPropertyCard = (props: TrendPropertyCardProps) => {
 								<RemoveRedEyeIcon />
 							</IconButton>
 							<Typography className="view-cnt">{property?.propertyViews}</Typography>
-							<IconButton color={'default'} onClick={() => likePropertyHandler(user, property?._id)}>
+							<IconButton color={'default'} onClick={() => likePropertyHandler(user, property._id)}>
 								{property?.meLiked && property?.meLiked[0]?.myFavorite ? (
 									<FavoriteIcon style={{ color: 'red' }} />
 								) : (

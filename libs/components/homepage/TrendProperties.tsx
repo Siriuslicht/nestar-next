@@ -46,7 +46,7 @@ const TrendProperties = (props: TrendPropertiesProps) => {
 	/** HANDLERS **/
 	const likePropertyHandler = async (user: T, id: string) => {
 		try {
-			if (!id) return;
+			if (!id) return; 
 			if (!user._id) throw new Error(Message.NOT_AUTHENTICATED);
 
 			await likeTargetProperty({
@@ -136,7 +136,10 @@ const TrendProperties = (props: TrendPropertiesProps) => {
 								{trendProperties.map((property: Property) => {
 									return (
 										<SwiperSlide key={property._id} className={'trend-property-slide'}>
-											<TrendPropertyCard property={property} likePropertyHandler={likePropertyHandler} />
+											<TrendPropertyCard 
+												property={property} 
+												likePropertyHandler={likePropertyHandler} 
+											/>
 										</SwiperSlide>
 									);
 								})}

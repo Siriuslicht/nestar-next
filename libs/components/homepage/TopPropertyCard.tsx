@@ -22,11 +22,15 @@ const TopPropertyCard = (props: TopPropertyCardProps) => {
 	const user = useReactiveVar(userVar);
 
 	/** HANDLERS **/
+	const pushDetailHandler = async (properytId: string) => {
+		await router.push({ pathname: 'property/detail', query: { id: properytId } });
+	};
 
 	if (device === 'mobile') {
 		return (
 			<Stack className="top-card-box">
 				<Box
+					onClick={() => pushDetailHandler(property._id)}
 					component={'div'}
 					className={'card-img'}
 					style={{ backgroundImage: `url(${REACT_APP_API_URL}/${property?.propertyImages[0]})` }}
@@ -34,7 +38,9 @@ const TopPropertyCard = (props: TopPropertyCardProps) => {
 					<div>${property?.propertyPrice}</div>
 				</Box>
 				<Box component={'div'} className={'info'}>
-					<strong className={'title'}>{property?.propertyTitle}</strong>
+					<strong onClick={() => pushDetailHandler(property._id)} className={'title'}>
+						{property?.propertyTitle}
+					</strong>
 					<p className={'desc'}>{property?.propertyAddress}</p>
 					<div className={'options'}>
 						<div>
@@ -62,7 +68,7 @@ const TopPropertyCard = (props: TopPropertyCardProps) => {
 								<RemoveRedEyeIcon />
 							</IconButton>
 							<Typography className="view-cnt">{property?.propertyViews}</Typography>
-							<IconButton color={'default'}>
+							<IconButton color={'default'} onClick={() => likePropertyHandler(user, property._id)}>
 								{property?.meLiked && property?.meLiked[0]?.myFavorite ? (
 									<FavoriteIcon style={{ color: 'red' }} />
 								) : (
@@ -79,6 +85,7 @@ const TopPropertyCard = (props: TopPropertyCardProps) => {
 		return (
 			<Stack className="top-card-box">
 				<Box
+					onClick={() => pushDetailHandler(property._id)}
 					component={'div'}
 					className={'card-img'}
 					style={{ backgroundImage: `url(${REACT_APP_API_URL}/${property?.propertyImages[0]})` }}
@@ -86,7 +93,9 @@ const TopPropertyCard = (props: TopPropertyCardProps) => {
 					<div>${property?.propertyPrice}</div>
 				</Box>
 				<Box component={'div'} className={'info'}>
-					<strong className={'title'}>{property?.propertyTitle}</strong>
+					<strong onClick={() => pushDetailHandler(property._id)} className={'title'}>
+						{property?.propertyTitle}
+					</strong>
 					<p className={'desc'}>{property?.propertyAddress}</p>
 					<div className={'options'}>
 						<div>
@@ -114,7 +123,7 @@ const TopPropertyCard = (props: TopPropertyCardProps) => {
 								<RemoveRedEyeIcon />
 							</IconButton>
 							<Typography className="view-cnt">{property?.propertyViews}</Typography>
-							<IconButton color={'default'} onClick={() => likePropertyHandler(user, property?._id)}>
+							<IconButton color={'default'} onClick={() => likePropertyHandler(user, property._id)}>
 								{property?.meLiked && property?.meLiked[0]?.myFavorite ? (
 									<FavoriteIcon style={{ color: 'red' }} />
 								) : (

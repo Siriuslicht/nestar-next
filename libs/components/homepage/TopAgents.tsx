@@ -37,6 +37,7 @@ const TopAgents = (props: TopAgentsProps) => {
 		},
 	});
 
+
 	/** HANDLERS **/
 
 	if (device === 'mobile') {

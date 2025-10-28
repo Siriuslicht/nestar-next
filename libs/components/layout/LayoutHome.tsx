@@ -18,6 +18,9 @@ const withLayoutMain = (Component: any) => {
 	return (props: any) => {
 		const device = useDeviceDetect();
 		const user = useReactiveVar(userVar);
+		console.log(
+			"props:", props
+		)
 
 		/** LIFECYCLES **/
 		useEffect(() => {
