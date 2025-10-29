@@ -16,12 +16,11 @@ import { PropertiesInquiry } from '../../libs/types/property/property.input';
 import { CommentInput, CommentsInquiry } from '../../libs/types/comment/comment.input';
 import { Comment } from '../../libs/types/comment/comment';
 import { CommentGroup } from '../../libs/enums/comment.enum';
-import { REACT_APP_API_URL } from '../../libs/config';
+import { Messages, REACT_APP_API_URL } from '../../libs/config';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { GET_COMMENTS, GET_MEMBER, GET_PROPERTIES } from '../../apollo/user/query';
 import { T } from '../../libs/types/common';
 import { CREATE_COMMENT, LIKE_TARGET_PROPERTY } from '../../apollo/user/mutation';
-import { Message } from '../../libs/enums/common.enum';
 
 export const getStaticProps = async ({ locale }: any) => ({
 	props: {
@@ -156,7 +155,7 @@ const AgentDetail: NextPage = ({ initialInput, initialComment, ...props }: any) 
 
 	const createCommentHandler = async () => {
 		try {
-			if (!user._id) throw new Error(Message.NO_DATA_FOUND)///////error2;
+			if (!user._id) throw new Error(Messages.error2);
 			if (user._id === agentId) throw new Error("Cannot write a review for yourself");
 
 			await createComment({
@@ -174,7 +173,7 @@ const AgentDetail: NextPage = ({ initialInput, initialComment, ...props }: any) 
 	const likePropertyHandler = async (user: any, id: string) => {
 		try {
 			if (!id) return;
-			if (!user._id) throw new Error(Message.NO_DATA_FOUND);/////////////////
+			if (!user._id) throw new Error(Messages.error2);
 
 			await likeTargetProperty({
 				variables: {

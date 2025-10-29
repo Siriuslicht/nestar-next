@@ -15,6 +15,7 @@ import { T } from '../../libs/types/common';
 import { GET_AGENTS } from '../../apollo/user/query';
 import { sweetMixinErrorAlert, sweetTopSmallSuccessAlert } from '../../libs/sweetAlert';
 import { Message } from '../../libs/enums/common.enum';
+import { Messages } from '../../libs/config';
 
 export const getStaticProps = async ({ locale }: any) => ({
 	props: {
@@ -118,7 +119,7 @@ const AgentList: NextPage = ({ initialInput, ...props }: any) => {
 	const likeMemberHandler = async (user: any, id: string) => {
 		try {
 			if (!id) return;
-			if (!user._id) throw new Error(Message.NO_DATA_FOUND);//////////////////// error2 needed
+			if (!user._id) throw new Error(Messages.error2);
 
 			await likeTargetMember({ 
 				variables: {
