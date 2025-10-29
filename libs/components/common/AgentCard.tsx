@@ -17,7 +17,7 @@ interface AgentCardProps {
   
 const AgentCard = (props: AgentCardProps) => {
 	const { agent, likeMemberHandler } = props;
-	const device = useDeviceDetect();
+	const device = useDeviceDetect() ;
 	const user = useReactiveVar(userVar);
 	const imagePath: string = agent?.memberImage
 		? `${REACT_APP_API_URL}/${agent?.memberImage}`
@@ -57,15 +57,15 @@ const AgentCard = (props: AgentCardProps) => {
 							}}
 						>
 							<strong>{agent?.memberFullName ?? agent?.memberNick}</strong>
-						</Link>
+						</Link> 
 						<span>Agent</span>
 					</Box>
 					<Box component={'div'} className={'buttons'}>
 						<IconButton color={'default'} onClick={() => likeMemberHandler(user, agent?._id)} >
 							<RemoveRedEyeIcon />
-						</IconButton>
+						</IconButton> 
 						<Typography className="view-cnt">{agent?.memberViews}</Typography>
-						<IconButton color={'default'}>
+						<IconButton color={'defaul t'}>
 							{agent?.meLiked && agent?.meLiked[0]?.myFavorite ? (
 								<FavoriteIcon color={'primary'} />
 							) : (

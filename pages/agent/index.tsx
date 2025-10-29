@@ -118,7 +118,7 @@ const AgentList: NextPage = ({ initialInput, ...props }: any) => {
 	const likeMemberHandler = async (user: any, id: string) => {
 		try {
 			if (!id) return;
-			if (!user._id) throw new Error(Message.NO_DATA_FOUND);
+			if (!user._id) throw new Error(Message.NO_DATA_FOUND);//////////////////// error2 needed
 
 			await likeTargetMember({ 
 				variables: {
