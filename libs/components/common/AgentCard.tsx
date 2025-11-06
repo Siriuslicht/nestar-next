@@ -12,17 +12,18 @@ import { userVar } from '../../../apollo/store';
 
 interface AgentCardProps {
 	agent: any;
-	likeMemberHandler: any;
+	likePropertyHandler: any;
 }
-  
+
 const AgentCard = (props: AgentCardProps) => {
-	const { agent, likeMemberHandler } = props;
-	const device = useDeviceDetect() ;
+	const { agent, likePropertyHandler } = props;
+	const device = useDeviceDetect();
 	const user = useReactiveVar(userVar);
 	const imagePath: string = agent?.memberImage
 		? `${REACT_APP_API_URL}/${agent?.memberImage}`
 		: '/img/profile/defaultUser.svg';
 
+	console.log(agent);
 	if (device === 'mobile') {
 		return <div>AGENT CARD</div>;
 	} else {
@@ -57,15 +58,15 @@ const AgentCard = (props: AgentCardProps) => {
 							}}
 						>
 							<strong>{agent?.memberFullName ?? agent?.memberNick}</strong>
-						</Link> 
+						</Link>
 						<span>Agent</span>
 					</Box>
 					<Box component={'div'} className={'buttons'}>
-						<IconButton color={'default'} onClick={() => likeMemberHandler(user, agent?._id)} >
+						<IconButton color={'default'}>
 							<RemoveRedEyeIcon />
-						</IconButton> 
+						</IconButton>
 						<Typography className="view-cnt">{agent?.memberViews}</Typography>
-						<IconButton color={'defaul t'}>
+						<IconButton color={'default'} onClick={() => likePropertyHandler(user, agent._id)}>
 							{agent?.meLiked && agent?.meLiked[0]?.myFavorite ? (
 								<FavoriteIcon color={'primary'} />
 							) : (

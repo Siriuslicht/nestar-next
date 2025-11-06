@@ -585,12 +585,12 @@ export const GET_MEMBER_FOLLOWINGS = gql`
 					memberDesc
 					memberProperties
 					memberArticles
+					memberFollowers
+					memberFollowings
 					memberPoints
 					memberLikes
 					memberViews
 					memberComments
-					memberFollowings
-					memberFollowers
 					memberRank
 					memberWarnings
 					memberBlocks

@@ -18,9 +18,6 @@ const withLayoutMain = (Component: any) => {
 	return (props: any) => {
 		const device = useDeviceDetect();
 		const user = useReactiveVar(userVar);
-		console.log(
-			"props:", props
-		)
 
 		/** LIFECYCLES **/
 		useEffect(() => {
@@ -75,7 +72,7 @@ const withLayoutMain = (Component: any) => {
 							<Component {...props} />
 						</Stack>
 
-						{user?._id && <Chat />}
+						<Chat />
 
 						<Stack id={'footer'}>
 							<Footer />
