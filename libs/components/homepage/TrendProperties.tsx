@@ -28,16 +28,17 @@ const TrendProperties = (props: TrendPropertiesProps) => {
 	const [likeTargetProperty] = useMutation(LIKE_TARGET_PROPERTY);
 
 
-	const { loading: getPropertiesLoading,
-		data: getPropertiesData,
-		error: getPropertiesError,
-		refetch: getPropertiesRefetch,
+	const { 
+		loading: getPropertiesLoading,// faza
+		data: getPropertiesData, // faza 
+		error: getPropertiesError, // faza
+		refetch: getPropertiesRefetch, //faza 
 
-	} = useQuery(GET_PROPERTIES, {
-		fetchPolicy: "cache-and-network",
-		variables: { input: initialInput },
-		notifyOnNetworkStatusChange: true,
-		onCompleted: (data: T) => {
+	} = useQuery(GET_PROPERTIES, { // query. a dalshe pastda options
+		fetchPolicy: "cache-and-network", // option
+		variables: { input: initialInput }, // datani qay tartibda fetch qilish kerak
+		notifyOnNetworkStatusChange: true,  // 
+		onCompleted: (data: T) => {            //  fetched data
 			setTrendProperties(data?.getProperties?.list);
 
 		},
